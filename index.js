@@ -27,8 +27,8 @@ router.get("/wel", (req, res) => {
 router.get("/blogs", (req, res) => {
     console.log("Hello??");
     // return res.status(200).send("Welcome to the /wel route");
-    return res.status(400).json({
-        status:"fail",
+    return res.status(200).json({
+        status:"success",
         data:[{name:"1",message:"ok"},{name:"2",message:"done"},]
     })
   });

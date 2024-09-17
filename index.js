@@ -56,7 +56,39 @@ const port = 8080;
 
 app.use(express.json()); // To parse JSON request bodies
 
-let students = []; // In-memory array to simulate a database
+// Static student data (30 records)
+let students = [
+    { id: 1, name: "John Doe", className: "10", percentage: 85, school: "ABC School", board: "CBSE", rating: 4.5 },
+    { id: 2, name: "Jane Smith", className: "12", percentage: 92, school: "XYZ School", board: "CBSE", rating: 4.7 },
+    { id: 3, name: "Alice Johnson", className: "11", percentage: 78, school: "DEF School", board: "UP", rating: 3.8 },
+    { id: 4, name: "Bob Brown", className: "9", percentage: 88, school: "GHI School", board: "CBSE", rating: 4.1 },
+    { id: 5, name: "Charlie White", className: "10", percentage: 67, school: "ABC School", board: "UP", rating: 2.9 },
+    { id: 6, name: "David Lee", className: "11", percentage: 81, school: "XYZ School", board: "CBSE", rating: 4.3 },
+    { id: 7, name: "Ella Green", className: "12", percentage: 94, school: "DEF School", board: "UP", rating: 4.8 },
+    { id: 8, name: "Frank King", className: "10", percentage: 70, school: "GHI School", board: "UP", rating: 3.0 },
+    { id: 9, name: "Grace Young", className: "9", percentage: 86, school: "ABC School", board: "CBSE", rating: 4.2 },
+    { id: 10, name: "Henry Allen", className: "11", percentage: 79, school: "XYZ School", board: "UP", rating: 3.9 },
+    { id: 11, name: "Ivy Clark", className: "12", percentage: 90, school: "DEF School", board: "CBSE", rating: 4.6 },
+    { id: 12, name: "Jack Harris", className: "10", percentage: 66, school: "GHI School", board: "UP", rating: 2.7 },
+    { id: 13, name: "Kelly Moore", className: "11", percentage: 82, school: "ABC School", board: "CBSE", rating: 4.4 },
+    { id: 14, name: "Leo Martin", className: "9", percentage: 88, school: "XYZ School", board: "CBSE", rating: 4.5 },
+    { id: 15, name: "Mona Perez", className: "12", percentage: 73, school: "DEF School", board: "UP", rating: 3.5 },
+    { id: 16, name: "Nina Turner", className: "10", percentage: 92, school: "GHI School", board: "CBSE", rating: 4.7 },
+    { id: 17, name: "Oscar Sanchez", className: "11", percentage: 80, school: "ABC School", board: "CBSE", rating: 4.0 },
+    { id: 18, name: "Paula Wilson", className: "9", percentage: 84, school: "XYZ School", board: "UP", rating: 4.1 },
+    { id: 19, name: "Quincy Scott", className: "12", percentage: 68, school: "DEF School", board: "UP", rating: 2.9 },
+    { id: 20, name: "Rachel Adams", className: "10", percentage: 91, school: "GHI School", board: "CBSE", rating: 4.6 },
+    { id: 21, name: "Sam Evans", className: "11", percentage: 77, school: "ABC School", board: "UP", rating: 3.7 },
+    { id: 22, name: "Tina Hall", className: "12", percentage: 89, school: "XYZ School", board: "CBSE", rating: 4.4 },
+    { id: 23, name: "Uma Patel", className: "9", percentage: 65, school: "DEF School", board: "UP", rating: 2.6 },
+    { id: 24, name: "Vince Brown", className: "10", percentage: 85, school: "GHI School", board: "CBSE", rating: 4.3 },
+    { id: 25, name: "Wendy Cooper", className: "11", percentage: 93, school: "ABC School", board: "CBSE", rating: 4.9 },
+    { id: 26, name: "Xander Lewis", className: "12", percentage: 72, school: "XYZ School", board: "UP", rating: 3.4 },
+    { id: 27, name: "Yara Mitchell", className: "9", percentage: 79, school: "DEF School", board: "CBSE", rating: 3.9 },
+    { id: 28, name: "Zack Parker", className: "10", percentage: 87, school: "GHI School", board: "CBSE", rating: 4.5 },
+    { id: 29, name: "Anna Bell", className: "11", percentage: 64, school: "ABC School", board: "UP", rating: 2.5 },
+    { id: 30, name: "Barry King", className: "12", percentage: 81, school: "XYZ School", board: "CBSE", rating: 4.1 }
+];
 
 // Helper function to apply pagination and sorting
 const applyPaginationAndSorting = (req, data) => {
@@ -94,19 +126,19 @@ app.get("/students", (req, res) => {
 // POST - Add a new student
 app.post("/students", (req, res) => {
     const { name, className, percentage, school, board, rating } = req.body;
-    
+
     if (!name || !className || !percentage || !school || !board || !rating) {
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    const newStudent = { 
+    const newStudent = {
         id: students.length + 1,
-        name, 
-        className, 
-        percentage, 
-        school, 
-        board, 
-        rating 
+        name,
+        className,
+        percentage,
+        school,
+        board,
+        rating
     };
 
     students.push(newStudent);
